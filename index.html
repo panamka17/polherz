@@ -32,37 +32,88 @@
         html.high-contrast, html.high-contrast * { background-color: #121212 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
         html.high-contrast img, html.high-contrast iframe { filter: grayscale(100%) contrast(120%); }
         details > summary::-webkit-details-marker { display: none; }
+
+        /* Custom Scrollbar for Language Menu */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #091c3c; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e58ba5; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d0708f; }
+
+        /* Hide the native GTranslate Widget fully */
+        .gtranslate_wrapper { display: none !important; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased relative">
 
     <!-- Accessibility Toolbar -->
-    <div class="fixed left-0 top-1/4 z-50 bg-white shadow-lg border border-gray-200 rounded-r-lg flex flex-col p-2 space-y-3" aria-label="Barrierefreiheit">
-        <button onclick="changeFontSize(1)" class="text-primary hover:text-secondary p-2 transition" aria-label="Text vergrößern" title="Text vergrößern"><i class="fas fa-search-plus fa-lg"></i></button>
-        <button onclick="changeFontSize(-1)" class="text-primary hover:text-secondary p-2 transition" aria-label="Text verkleinern" title="Text verkleinern"><i class="fas fa-search-minus fa-lg"></i></button>
-        <button onclick="toggleContrast()" class="text-primary hover:text-secondary p-2 transition" aria-label="Hoher Kontrast" title="Kontrast umschalten"><i class="fas fa-adjust fa-lg"></i></button>
+    <div class="fixed left-0 top-1/4 z-50 flex items-start" aria-label="Barrierefreiheit">
+        <div id="a11y-menu" class="bg-white shadow-lg border-y border-r border-gray-200 rounded-br-lg md:rounded-r-lg flex-col p-0 space-y-2 transition-all duration-300 overflow-hidden w-0 opacity-0 md:w-auto md:opacity-100 md:flex md:p-2 items-center justify-center">
+            <button onclick="changeFontSize(1)" class="text-primary hover:text-secondary p-3 transition whitespace-nowrap" aria-label="Text vergrößern" title="Text vergrößern"><i class="fas fa-search-plus fa-lg"></i></button>
+            <button onclick="changeFontSize(-1)" class="text-primary hover:text-secondary p-3 transition whitespace-nowrap" aria-label="Text verkleinern" title="Text verkleinern"><i class="fas fa-search-minus fa-lg"></i></button>
+            <button onclick="toggleContrast()" class="text-primary hover:text-secondary p-3 transition whitespace-nowrap" aria-label="Hoher Kontrast" title="Kontrast umschalten"><i class="fas fa-adjust fa-lg"></i></button>
+        </div>
+        <button onclick="toggleA11y()" class="bg-white shadow-lg border-y border-r border-gray-200 rounded-r-lg p-3 text-primary hover:text-secondary transition md:hidden flex items-center justify-center ml-[-1px]" aria-label="Barrierefreiheit Menü umschalten">
+            <i class="fas fa-universal-access fa-xl"></i>
+        </button>
     </div>
 
-    <!-- Sticky Navigation (IDENTICAL ACROSS ALL FILES) -->
+    <!-- Sticky Navigation -->
     <header class="sticky top-0 z-40 bg-primary text-white shadow-md">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2">
-                <i class="fas fa-heart-pulse text-secondary text-3xl"></i>
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2 shrink-0">
+                <i class="fas fa-heart-pulse text-secondary text-2xl md:text-3xl"></i>
                 <div>
-                    <h1 class="text-2xl font-bold tracking-wide">Pol<span class="text-secondary">Herz</span></h1>
-                    <p class="text-xs text-gray-300">AMBULANTER PFLEGEDIENST</p>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-wide">Pol<span class="text-secondary">Herz</span></h1>
+                    <p class="text-[10px] md:text-xs text-gray-300 hidden sm:block">AMBULANTER PFLEGEDIENST</p>
                 </div>
             </a>
-            <nav class="hidden md:flex space-x-6 font-medium">
-                <a href="index.html#ueber-uns" class="hover:text-secondary transition duration-300">Über uns</a>
-                <a href="index.html#leistungen" class="hover:text-secondary transition duration-300">Leistungen</a>
-                <a href="index.html#standorte" class="hover:text-secondary transition duration-300">Standorte</a>
-                <a href="index.html#faq" class="hover:text-secondary transition duration-300">FAQ</a>
-                <a href="index.html#karriere" class="hover:text-secondary transition duration-300">Karriere</a>
-                <a href="index.html#kontakt" class="hover:text-secondary transition duration-300">Kontakt</a>
-            </nav>
-            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Menü öffnen"><i class="fas fa-bars text-2xl"></i></button>
+            
+            <!-- Right-aligned Elements Container -->
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <!-- Desktop Nav Tabs -->
+                <nav class="hidden md:flex space-x-6 font-medium items-center">
+                    <a href="index.html#ueber-uns" class="hover:text-secondary transition duration-300">Über uns</a>
+                    <a href="index.html#leistungen" class="hover:text-secondary transition duration-300">Leistungen</a>
+                    <a href="index.html#standorte" class="hover:text-secondary transition duration-300">Standorte</a>
+                    <a href="index.html#faq" class="hover:text-secondary transition duration-300">FAQ</a>
+                    <a href="index.html#karriere" class="hover:text-secondary transition duration-300">Karriere</a>
+                    <a href="index.html#kontakt" class="hover:text-secondary transition duration-300">Kontakt</a>
+                </nav>
+
+                <!-- Custom Language Dropdown (Replaces default widget) -->
+                <div class="relative inline-block text-left" id="custom-lang-container">
+                    <button type="button" class="flex items-center gap-2 bg-primary border border-secondary rounded-md px-3 py-1.5 text-sm font-medium text-white hover:bg-secondary hover:text-primary focus:outline-none transition group" onclick="toggleLangMenu(event)">
+                        <i class="fas fa-globe text-secondary group-hover:text-primary transition"></i>
+                        <span id="current-lang-display">DE</span>
+                        <i class="fas fa-chevron-down text-[10px] text-white group-hover:text-primary transition"></i>
+                    </button>
+                    <!-- Dropdown List -->
+                    <div id="lang-menu" class="absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-primary shadow-xl border border-secondary focus:outline-none hidden flex-col z-50 max-h-64 overflow-y-auto custom-scrollbar">
+                        <a href="#" onclick="changeGTranslate('de', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Deutsch (DE)</a>
+                        <a href="#" onclick="changeGTranslate('en', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">English (EN)</a>
+                        <a href="#" onclick="changeGTranslate('pl', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Polski (PL)</a>
+                        <a href="#" onclick="changeGTranslate('tr', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Türkçe (TR)</a>
+                        <a href="#" onclick="changeGTranslate('ru', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Русский (RU)</a>
+                        <a href="#" onclick="changeGTranslate('ar', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">العربية (AR)</a>
+                        <a href="#" onclick="changeGTranslate('uk', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Українська (UK)</a>
+                        <a href="#" onclick="changeGTranslate('it', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Italiano (IT)</a>
+                        <a href="#" onclick="changeGTranslate('ku', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Kurdî (KU)</a>
+                        <a href="#" onclick="changeGTranslate('ro', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Română (RO)</a>
+                    </div>
+                </div>
+
+                <!-- Hidden Actual GTranslate Element -->
+                <div class="gtranslate_wrapper"></div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none shrink-0" aria-label="Menü öffnen">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
         </div>
+
+        <!-- Mobile Nav Dropdown -->
         <div id="mobile-menu" class="hidden md:hidden bg-primary pb-4 px-4 space-y-3 shadow-inner">
             <a href="index.html#ueber-uns" class="block text-white hover:text-secondary transition">Über uns</a>
             <a href="index.html#leistungen" class="block text-white hover:text-secondary transition">Leistungen</a>
@@ -91,23 +142,22 @@
         </div>
     </section>
 
-    <!-- Trust Signals / Partner Banner (FIXED FOR MOBILE) -->
-    <section class="bg-white py-8 border-b border-gray-200">
+    <!-- Trust Signals / Partner Banner -->
+    <section class="bg-white py-10 border-b border-gray-200">
         <div class="container mx-auto px-4 reveal">
-            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-6 text-center">Zugelassen bei allen Kranken- und Pflegekassen</h3>
-            <!-- Changed layout: Stack on mobile with left-alignment, row on desktop -->
-            <div class="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-16 opacity-70 w-fit mx-auto">
-                <div class="flex items-center gap-4">
-                    <i class="fas fa-shield-alt text-3xl text-primary w-10 text-center"></i> 
-                    <span class="font-bold text-gray-700">Pflegekasse Partner</span>
+            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8 text-center">Zugelassen bei allen Kranken- und Pflegekassen</h3>
+            <div class="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-12 opacity-80 max-w-xs md:max-w-4xl mx-auto">
+                <div class="flex items-center gap-4 w-full md:w-auto justify-start">
+                    <i class="fas fa-shield-alt text-3xl text-primary w-10 text-center flex-shrink-0"></i> 
+                    <span class="font-bold text-gray-700 text-left">Pflegekasse Partner</span>
                 </div>
-                <div class="flex items-center gap-4">
-                    <i class="fas fa-check-circle text-3xl text-primary w-10 text-center"></i> 
-                    <span class="font-bold text-gray-700">Medizinischer Dienst Geprüft</span>
+                <div class="flex items-center gap-4 w-full md:w-auto justify-start">
+                    <i class="fas fa-check-circle text-3xl text-primary w-10 text-center flex-shrink-0"></i> 
+                    <span class="font-bold text-gray-700 text-left">Medizinischer Dienst Geprüft</span>
                 </div>
-                <div class="flex items-center gap-4">
-                    <i class="fas fa-user-md text-3xl text-primary w-10 text-center"></i> 
-                    <span class="font-bold text-gray-700">Qualifiziertes Personal<br class="md:hidden"> (Deutschsprachig)</span>
+                <div class="flex items-center gap-4 w-full md:w-auto justify-start">
+                    <i class="fas fa-user-md text-3xl text-primary w-10 text-center flex-shrink-0"></i> 
+                    <span class="font-bold text-gray-700 text-left">Qualifiziertes Personal <br class="hidden md:block">(Deutschsprachig)</span>
                 </div>
             </div>
         </div>
@@ -136,7 +186,7 @@
         </div>
     </section>
 
-    <!-- Leistungen (UPDATED TO CLICKABLE CARDS) -->
+    <!-- Leistungen -->
     <section id="leistungen" class="py-20 bg-white">
         <div class="container mx-auto px-4 reveal">
             <div class="text-center mb-16">
@@ -146,14 +196,11 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                
-                <!-- Service 1: Grundpflege -->
-                <div class="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group" onclick="toggleService(this)">
+                <div class="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group select-none" onclick="toggleService(this)">
                     <i class="fas fa-bath text-4xl text-primary mb-6"></i>
                     <h3 class="text-xl font-bold text-primary mb-3">Grundpflege</h3>
                     <p class="text-gray-600 mb-4">Unterstützung bei der täglichen Körperpflege, An- und Auskleiden sowie Betten und Lagern. Wir wahren dabei stets die Intimsphäre und Würde.</p>
-                    
-                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text" onclick="event.stopPropagation()">
+                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text select-text" onclick="event.stopPropagation()">
                         <p>Unsere qualifizierten Pflegekräfte unterstützen Sie bei den wiederkehrenden Tätigkeiten des Alltags:</p>
                         <ul class="list-disc pl-5 space-y-2">
                             <li><strong>Körperpflege:</strong> Hilfestellung beim Waschen, Duschen, Baden sowie bei der Zahnpflege, beim Kämmen und Rasieren.</li>
@@ -162,20 +209,16 @@
                             <li><strong>Ausscheidungen:</strong> Diskrete Hilfestellung beim Toilettengang und professionelle Inkontinenzversorgung.</li>
                         </ul>
                     </div>
-
-                    <!-- Div replacing the button, visually acts as a call to action -->
-                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition select-none">
+                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition pointer-events-none">
                         <span class="btn-text">Mehr anzeigen</span> <i class="fas fa-chevron-down toggle-icon transition-transform duration-300"></i>
                     </div>
                 </div>
 
-                <!-- Service 2: Behandlungspflege -->
-                <div class="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group" onclick="toggleService(this)">
+                <div class="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group select-none" onclick="toggleService(this)">
                     <i class="fas fa-briefcase-medical text-4xl text-primary mb-6"></i>
                     <h3 class="text-xl font-bold text-primary mb-3">Behandlungspflege</h3>
                     <p class="text-gray-600 mb-4">Medizinische Versorgung nach ärztlicher Verordnung. Dazu gehören unter anderem die Medikamentengabe, Verbandswechsel und Injektionen.</p>
-                    
-                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text" onclick="event.stopPropagation()">
+                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text select-text" onclick="event.stopPropagation()">
                         <p>Die medizinische Behandlungspflege wird von examiniertem Fachpersonal durchgeführt und in der Regel von Ihrem Hausarzt verordnet:</p>
                         <ul class="list-disc pl-5 space-y-2">
                             <li><strong>Medikamentengabe:</strong> Sicheres Herrichten, Verabreichen und Überwachen von Medikamenten.</li>
@@ -185,19 +228,16 @@
                             <li><strong>Vitalwertekontrolle:</strong> Regelmäßige Überprüfung von Blutdruck, Puls und Blutzucker.</li>
                         </ul>
                     </div>
-
-                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition select-none">
+                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition pointer-events-none">
                         <span class="btn-text">Mehr anzeigen</span> <i class="fas fa-chevron-down toggle-icon transition-transform duration-300"></i>
                     </div>
                 </div>
 
-                <!-- Service 3: Haushaltshilfe -->
-                <div class="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group" onclick="toggleService(this)">
+                <div class="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group select-none" onclick="toggleService(this)">
                     <i class="fas fa-home text-4xl text-primary mb-6"></i>
                     <h3 class="text-xl font-bold text-primary mb-3">Haushaltshilfe</h3>
                     <p class="text-gray-600 mb-4">Unterstützung bei der Bewältigung des alltäglichen Haushalts. Wir helfen bei der Reinigung, beim Einkaufen und der Wäschepflege.</p>
-                    
-                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text" onclick="event.stopPropagation()">
+                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text select-text" onclick="event.stopPropagation()">
                         <p>Ein gepflegtes Zuhause trägt maßgeblich zum Wohlbefinden bei. Wir entlasten Sie bei den alltäglichen Pflichten:</p>
                         <ul class="list-disc pl-5 space-y-2">
                             <li><strong>Raumpflege:</strong> Reinigung der genutzten Wohnräume, der Küche und des Badezimmers.</li>
@@ -207,19 +247,16 @@
                             <li><strong>Botengänge:</strong> Müllentsorgung, Einlösen von Rezepten in der Apotheke und kleine Botengänge.</li>
                         </ul>
                     </div>
-
-                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition select-none">
+                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition pointer-events-none">
                         <span class="btn-text">Mehr anzeigen</span> <i class="fas fa-chevron-down toggle-icon transition-transform duration-300"></i>
                     </div>
                 </div>
 
-                <!-- Service 4: Zusatzservice für Senioren -->
-                <div class="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group" onclick="toggleService(this)">
+                <div class="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group select-none" onclick="toggleService(this)">
                     <i class="fas fa-tools text-4xl text-primary mb-6"></i>
                     <h3 class="text-xl font-bold text-primary mb-3">Zusatzservice für Senioren</h3>
                     <p class="text-gray-600 mb-4">Wohnraumanpassung, barrierefreier Umbau und Unterstützung bei Umzügen für ein sicheres und selbstbestimmtes Leben zu Hause.</p>
-                    
-                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text" onclick="event.stopPropagation()">
+                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text select-text" onclick="event.stopPropagation()">
                         <h4 class="font-bold text-primary text-lg">Wohnraumanpassung & Unterstützung beim Umzug</h4>
                         <p class="font-semibold text-secondary">Sicher und selbstständig zu Hause leben</p>
                         <p>Bei PolHerz GmbH möchten wir Senioren und ihre Angehörigen nicht nur im Rahmen der ambulanten Pflege unterstützen. Deshalb bieten wir zusätzliche Unterstützung rund um das Zuhause an. Unser Ziel ist es, gemeinsam Lösungen zu finden, die den Alltag sicherer, komfortabler und selbstständiger machen.</p>
@@ -250,8 +287,7 @@
                         <p class="font-semibold text-primary mt-2">Persönlich. Sicher. Individuell.</p>
                         <p>Wir möchten, dass Senioren möglichst lange sicher, selbstbestimmt und mit Lebensqualität in ihrem Zuhause leben können. Deshalb begleiten wir nicht nur den Menschen – sondern schaffen gemeinsam mit ihm und seinen Angehörigen ein Zuhause, in dem er sich sicher und wohlfühlen kann.</p>
                     </div>
-
-                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition select-none">
+                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition pointer-events-none">
                         <span class="btn-text">Mehr anzeigen</span> <i class="fas fa-chevron-down toggle-icon transition-transform duration-300"></i>
                     </div>
                 </div>
@@ -436,13 +472,62 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Official GTranslate Script -->
+    <script>window.gtranslateSettings = {"default_language":"de","languages":["de","en","pl","tr","ru","ar","uk","it","ku","ro"],"wrapper_selector":".gtranslate_wrapper"}</script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
+
+    <!-- Custom Script Logic -->
     <script>
+        // Custom Language Selector Function
+        function toggleLangMenu(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('lang-menu').classList.toggle('hidden');
+        }
+
+        // Close lang menu if clicking outside
+        document.addEventListener('click', function(event) {
+            const langContainer = document.getElementById('custom-lang-container');
+            const langMenu = document.getElementById('lang-menu');
+            if (langContainer && !langContainer.contains(event.target)) {
+                langMenu.classList.add('hidden');
+            }
+        });
+
+        // Trigger hidden GTranslate when our custom menu is clicked
+        function changeGTranslate(langCode, e) {
+            e.preventDefault();
+            
+            // The GTranslate script injects a native select into our hidden wrapper. 
+            // We change its value programmatically.
+            const gtSelect = document.querySelector('.gtranslate_wrapper select');
+            if (gtSelect) {
+                gtSelect.value = langCode;
+                gtSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            
+            document.getElementById('current-lang-display').innerText = langCode.toUpperCase();
+            document.getElementById('lang-menu').classList.add('hidden');
+        }
+
+        // Detect current language from cookie on load to update custom UI
+        document.addEventListener("DOMContentLoaded", () => {
+            const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+            if (langCookie) {
+                const langValue = langCookie.split('=')[1].split('/').pop();
+                if (langValue && langValue !== 'de') {
+                    document.getElementById('current-lang-display').innerText = langValue.toUpperCase();
+                }
+            }
+        });
+
+        // Mobile Nav Menu Logic
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => menu.classList.toggle('hidden'));
         menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.classList.add('hidden')));
 
+        // Scroll Reveal
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -454,6 +539,7 @@
         window.addEventListener("scroll", reveal);
         reveal();
 
+        // Accessibility Tools
         let currentFontSize = 100; 
         function changeFontSize(step) {
             currentFontSize += (step * 10);
@@ -463,20 +549,7 @@
         }
         function toggleContrast() { document.documentElement.classList.toggle('high-contrast'); }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            if (localStorage.getItem("cookieAccepted") === "true") {
-                document.getElementById("cookie-banner").style.display = "none";
-            }
-        });
-
-        function acceptCookies() { 
-            localStorage.setItem("cookieAccepted", "true");
-            const banner = document.getElementById('cookie-banner');
-            banner.style.transform = 'translateY(100%)'; 
-            setTimeout(() => { banner.style.display = 'none'; }, 500);
-        }
-
-        // Updated Toggle Service Function (now applied to the parent card)
+        // Service Expand Logic
         function toggleService(card) {
             const content = card.querySelector('.hidden-content');
             const textSpan = card.querySelector('.btn-text');
@@ -493,6 +566,31 @@
                 textSpan.textContent = 'Mehr anzeigen';
                 icon.classList.remove('rotate-180');
             }
+        }
+
+        function toggleA11y() {
+            const menu = document.getElementById('a11y-menu');
+            if (menu.classList.contains('w-0')) {
+                menu.classList.remove('w-0', 'opacity-0', 'p-0');
+                menu.classList.add('w-14', 'opacity-100', 'p-1', 'flex'); 
+            } else {
+                menu.classList.add('w-0', 'opacity-0', 'p-0');
+                menu.classList.remove('w-14', 'opacity-100', 'p-1', 'flex'); 
+            }
+        }
+
+        // DSGVO Banner
+        document.addEventListener("DOMContentLoaded", () => {
+            if (localStorage.getItem("cookieAccepted") === "true") {
+                document.getElementById("cookie-banner").style.display = "none";
+            }
+        });
+
+        function acceptCookies() { 
+            localStorage.setItem("cookieAccepted", "true");
+            const banner = document.getElementById('cookie-banner');
+            banner.style.transform = 'translateY(100%)'; 
+            setTimeout(() => { banner.style.display = 'none'; }, 500);
         }
     </script>
 </body>
