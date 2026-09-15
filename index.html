@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PolHerz GmbH - Ambulanter Pflegedienst in Willich. Ein polnisches Herz für alle.">
+    <title>PolHerz GmbH | Ambulanter Pflegedienst</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#091c3c',
+                        secondary: '#e58ba5',
+                        accent: '#ffffff',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        html.high-contrast, html.high-contrast * { background-color: #121212 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
+        html.high-contrast img, html.high-contrast iframe { filter: grayscale(100%) contrast(120%); }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased relative">
+
+    <!-- Accessibility Toolbar -->
+    <div class="fixed left-0 top-1/4 z-50 bg-white shadow-lg border border-gray-200 rounded-r-lg flex flex-col p-2 space-y-3" aria-label="Barrierefreiheit">
+        <button onclick="changeFontSize(1)" class="text-primary hover:text-secondary p-2 transition" aria-label="Text vergrößern" title="Text vergrößern"><i class="fas fa-search-plus fa-lg"></i></button>
+        <button onclick="changeFontSize(-1)" class="text-primary hover:text-secondary p-2 transition" aria-label="Text verkleinern" title="Text verkleinern"><i class="fas fa-search-minus fa-lg"></i></button>
+        <button onclick="toggleContrast()" class="text-primary hover:text-secondary p-2 transition" aria-label="Hoher Kontrast" title="Kontrast umschalten"><i class="fas fa-adjust fa-lg"></i></button>
+    </div>
+
+    <!-- Sticky Navigation (IDENTICAL ACROSS ALL FILES) -->
+    <header class="sticky top-0 z-40 bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fas fa-heart-pulse text-secondary text-3xl"></i>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-wide">Pol<span class="text-secondary">Herz</span></h1>
+                    <p class="text-xs text-gray-300">AMBULANTER PFLEGEDIENST</p>
+                </div>
+            </a>
+            <nav class="hidden md:flex space-x-6 font-medium">
+                <a href="index.html#ueber-uns" class="hover:text-secondary transition duration-300">Über uns</a>
+                <a href="index.html#leistungen" class="hover:text-secondary transition duration-300">Leistungen</a>
+                <a href="index.html#standorte" class="hover:text-secondary transition duration-300">Standorte</a>
+                <a href="index.html#faq" class="hover:text-secondary transition duration-300">FAQ</a>
+                <a href="index.html#karriere" class="hover:text-secondary transition duration-300">Karriere</a>
+                <a href="index.html#kontakt" class="hover:text-secondary transition duration-300">Kontakt</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Menü öffnen"><i class="fas fa-bars text-2xl"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-primary pb-4 px-4 space-y-3 shadow-inner">
+            <a href="index.html#ueber-uns" class="block text-white hover:text-secondary transition">Über uns</a>
+            <a href="index.html#leistungen" class="block text-white hover:text-secondary transition">Leistungen</a>
+            <a href="index.html#standorte" class="block text-white hover:text-secondary transition">Standorte</a>
+            <a href="index.html#faq" class="block text-white hover:text-secondary transition">FAQ</a>
+            <a href="index.html#karriere" class="block text-white hover:text-secondary transition">Karriere</a>
+            <a href="index.html#kontakt" class="block text-white hover:text-secondary transition">Kontakt</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-primary text-white pt-24 pb-32 px-4 relative overflow-hidden flex items-center justify-center min-h-[70vh]">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center"></div>
+        <div class="container mx-auto text-center relative z-10 reveal">
+            <i class="fas fa-heart text-secondary text-5xl mb-4 animate-pulse"></i>
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 font-serif italic">Ein polnisches Herz für alle</h2>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-gray-200">
+                Ihr vertrauensvoller, ambulanter Pflegedienst in Willich und Umgebung. Wir bieten würdevolle Pflege, Sicherheit und Geborgenheit im eigenen Zuhause.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="index.html#kontakt" class="bg-secondary text-primary font-bold py-3 px-8 rounded-full hover:bg-white transition duration-300 shadow-lg transform hover:scale-105">Beratung anfordern</a>
+                <a href="tel:+490000000000" class="bg-transparent border-2 border-secondary text-secondary font-bold py-3 px-8 rounded-full hover:bg-secondary hover:text-primary transition duration-300 shadow-lg flex items-center gap-2">
+                    <i class="fas fa-phone"></i> +49 xxxx xxx xxx
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Signals / Partner Banner (FIXED FOR MOBILE) -->
+    <section class="bg-white py-8 border-b border-gray-200">
+        <div class="container mx-auto px-4 reveal">
+            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-6 text-center">Zugelassen bei allen Kranken- und Pflegekassen</h3>
+            <!-- Changed layout: Stack on mobile with left-alignment, row on desktop -->
+            <div class="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-16 opacity-70 w-fit mx-auto">
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-shield-alt text-3xl text-primary w-10 text-center"></i> 
+                    <span class="font-bold text-gray-700">Pflegekasse Partner</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-check-circle text-3xl text-primary w-10 text-center"></i> 
+                    <span class="font-bold text-gray-700">Medizinischer Dienst Geprüft</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <i class="fas fa-user-md text-3xl text-primary w-10 text-center"></i> 
+                    <span class="font-bold text-gray-700">Qualifiziertes Personal<br class="md:hidden"> (Deutschsprachig)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Über uns -->
+    <section id="ueber-uns" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 reveal">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <img src="https://www.nurseregistry.com/wp-content/uploads/2016/04/nurse-holding-senior-woman-and-smiling.jpg" alt="Pflegekraft hilft Seniorin" class="rounded-2xl shadow-xl hover:shadow-2xl transition duration-500 w-full object-cover h-[400px]">
+                </div>
+                <div class="lg:w-1/2 space-y-6">
+                    <h2 class="text-3xl font-bold text-primary">Über PolHerz GmbH</h2>
+                    <div class="w-16 h-1 bg-secondary rounded"></div>
+                    <p class="text-gray-600 leading-relaxed text-lg">Wir bei der PolHerz GmbH verstehen, dass die Entscheidung für einen Pflegedienst Vertrauenssache ist. Besonders für Angehörige, die das Beste für ihre Eltern oder Großeltern suchen, möchten wir ein starker Partner sein.</p>
+                    <p class="text-gray-600 leading-relaxed text-lg">Mit Respekt, Empathie und fachlicher Kompetenz ermöglichen wir pflegebedürftigen Menschen ein selbstbestimmtes Leben in ihrer gewohnten Umgebung. Unser Team besteht aus examinierten Pflegekräften, die ihren Beruf als Berufung verstehen – eben mit ganzem Herzen.</p>
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-center gap-3"><div class="bg-pink-100 p-3 rounded-full text-secondary"><i class="fas fa-hand-holding-heart fa-lg"></i></div><span class="font-semibold text-primary">Mit Herz & Empathie</span></div>
+                        <div class="flex items-center gap-3"><div class="bg-pink-100 p-3 rounded-full text-secondary"><i class="fas fa-home fa-lg"></i></div><span class="font-semibold text-primary">Sicherheit Zuhause</span></div>
+                        <div class="flex items-center gap-3"><div class="bg-pink-100 p-3 rounded-full text-secondary"><i class="fas fa-users fa-lg"></i></div><span class="font-semibold text-primary">Pflege für alle</span></div>
+                        <div class="flex items-center gap-3"><div class="bg-pink-100 p-3 rounded-full text-secondary"><i class="fas fa-dove fa-lg"></i></div><span class="font-semibold text-primary">Respekt & Würde</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leistungen (UPDATED TO CLICKABLE CARDS) -->
+    <section id="leistungen" class="py-20 bg-white">
+        <div class="container mx-auto px-4 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Unsere Leistungen</h2>
+                <div class="w-16 h-1 bg-secondary rounded mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Wir konzentrieren uns auf das, was im Alltag am wichtigsten ist. Unsere Pflege stellt sicher, dass Ihre Liebsten bestens versorgt sind.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Service 1: Grundpflege -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group" onclick="toggleService(this)">
+                    <i class="fas fa-bath text-4xl text-primary mb-6"></i>
+                    <h3 class="text-xl font-bold text-primary mb-3">Grundpflege</h3>
+                    <p class="text-gray-600 mb-4">Unterstützung bei der täglichen Körperpflege, An- und Auskleiden sowie Betten und Lagern. Wir wahren dabei stets die Intimsphäre und Würde.</p>
+                    
+                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text" onclick="event.stopPropagation()">
+                        <p>Unsere qualifizierten Pflegekräfte unterstützen Sie bei den wiederkehrenden Tätigkeiten des Alltags:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Körperpflege:</strong> Hilfestellung beim Waschen, Duschen, Baden sowie bei der Zahnpflege, beim Kämmen und Rasieren.</li>
+                            <li><strong>Ernährung:</strong> Mundgerechte Zubereitung der Mahlzeiten sowie Unterstützung bei der Nahrungs- und Flüssigkeitsaufnahme.</li>
+                            <li><strong>Mobilität:</strong> Unterstützung beim Aufstehen, Zu-Bett-Gehen, Umsetzen (z. B. vom Bett in den Rollstuhl) und bei der Fortbewegung in der Wohnung.</li>
+                            <li><strong>Ausscheidungen:</strong> Diskrete Hilfestellung beim Toilettengang und professionelle Inkontinenzversorgung.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Div replacing the button, visually acts as a call to action -->
+                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition select-none">
+                        <span class="btn-text">Mehr anzeigen</span> <i class="fas fa-chevron-down toggle-icon transition-transform duration-300"></i>
+                    </div>
+                </div>
+
+                <!-- Service 2: Behandlungspflege -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group" onclick="toggleService(this)">
+                    <i class="fas fa-briefcase-medical text-4xl text-primary mb-6"></i>
+                    <h3 class="text-xl font-bold text-primary mb-3">Behandlungspflege</h3>
+                    <p class="text-gray-600 mb-4">Medizinische Versorgung nach ärztlicher Verordnung. Dazu gehören unter anderem die Medikamentengabe, Verbandswechsel und Injektionen.</p>
+                    
+                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text" onclick="event.stopPropagation()">
+                        <p>Die medizinische Behandlungspflege wird von examiniertem Fachpersonal durchgeführt und in der Regel von Ihrem Hausarzt verordnet:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Medikamentengabe:</strong> Sicheres Herrichten, Verabreichen und Überwachen von Medikamenten.</li>
+                            <li><strong>Injektionen:</strong> Fachgerechte Verabreichung von s.c. Injektionen (z. B. Insulin oder Thrombosespritzen).</li>
+                            <li><strong>Kompressionstherapie:</strong> Professionelles An- und Ausziehen von Kompressionsstrümpfen sowie Anlegen von Kompressionsverbänden.</li>
+                            <li><strong>Wundversorgung:</strong> Fachgerechter Verbandswechsel und Versorgung chronischer oder akuter Wunden.</li>
+                            <li><strong>Vitalwertekontrolle:</strong> Regelmäßige Überprüfung von Blutdruck, Puls und Blutzucker.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition select-none">
+                        <span class="btn-text">Mehr anzeigen</span> <i class="fas fa-chevron-down toggle-icon transition-transform duration-300"></i>
+                    </div>
+                </div>
+
+                <!-- Service 3: Haushaltshilfe -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group" onclick="toggleService(this)">
+                    <i class="fas fa-home text-4xl text-primary mb-6"></i>
+                    <h3 class="text-xl font-bold text-primary mb-3">Haushaltshilfe</h3>
+                    <p class="text-gray-600 mb-4">Unterstützung bei der Bewältigung des alltäglichen Haushalts. Wir helfen bei der Reinigung, beim Einkaufen und der Wäschepflege.</p>
+                    
+                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text" onclick="event.stopPropagation()">
+                        <p>Ein gepflegtes Zuhause trägt maßgeblich zum Wohlbefinden bei. Wir entlasten Sie bei den alltäglichen Pflichten:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Raumpflege:</strong> Reinigung der genutzten Wohnräume, der Küche und des Badezimmers.</li>
+                            <li><strong>Wäschepflege:</strong> Waschen, Aufhängen, Bügeln und Einräumen der Kleidung sowie der Bettwäsche.</li>
+                            <li><strong>Einkaufen:</strong> Erledigung von Wocheneinkäufen und Besorgung von Dingen des täglichen Bedarfs nach Absprache.</li>
+                            <li><strong>Ernährung:</strong> Zubereitung von warmen und kalten Mahlzeiten direkt bei Ihnen zu Hause.</li>
+                            <li><strong>Botengänge:</strong> Müllentsorgung, Einlösen von Rezepten in der Apotheke und kleine Botengänge.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition select-none">
+                        <span class="btn-text">Mehr anzeigen</span> <i class="fas fa-chevron-down toggle-icon transition-transform duration-300"></i>
+                    </div>
+                </div>
+
+                <!-- Service 4: Zusatzservice für Senioren -->
+                <div class="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-xl transition duration-300 border-t-4 border-secondary flex flex-col h-full cursor-pointer group" onclick="toggleService(this)">
+                    <i class="fas fa-tools text-4xl text-primary mb-6"></i>
+                    <h3 class="text-xl font-bold text-primary mb-3">Zusatzservice für Senioren</h3>
+                    <p class="text-gray-600 mb-4">Wohnraumanpassung, barrierefreier Umbau und Unterstützung bei Umzügen für ein sicheres und selbstbestimmtes Leben zu Hause.</p>
+                    
+                    <div class="hidden-content hidden flex-grow flex-col text-gray-600 mt-2 border-t border-gray-200 pt-4 space-y-3 cursor-text" onclick="event.stopPropagation()">
+                        <h4 class="font-bold text-primary text-lg">Wohnraumanpassung & Unterstützung beim Umzug</h4>
+                        <p class="font-semibold text-secondary">Sicher und selbstständig zu Hause leben</p>
+                        <p>Bei PolHerz GmbH möchten wir Senioren und ihre Angehörigen nicht nur im Rahmen der ambulanten Pflege unterstützen. Deshalb bieten wir zusätzliche Unterstützung rund um das Zuhause an. Unser Ziel ist es, gemeinsam Lösungen zu finden, die den Alltag sicherer, komfortabler und selbstständiger machen.</p>
+                        
+                        <h5 class="font-bold text-gray-800 mt-2">Wohnraumanpassung</h5>
+                        <p>Wir unterstützen bei der Anpassung der Wohnung an die individuellen Bedürfnisse älterer Menschen. Dazu gehören unter anderem:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Anpassung des Badezimmers an die Bedürfnisse von Senioren</li>
+                            <li>Austausch der Badewanne gegen eine barrierearme Dusche</li>
+                            <li>Montage von Haltegriffen, Stütz- und Sicherheitssystemen</li>
+                            <li>Unterstützung bei der Auswahl geeigneter Hilfsmittel für Bad und Dusche</li>
+                            <li>Anpassung von Toilette und Waschbereich</li>
+                            <li>Verbesserung der Sicherheit im Wohnbereich</li>
+                            <li>Beseitigung von Stolperfallen und anderen möglichen Gefahrenquellen</li>
+                            <li>Unterstützung bei der Planung und Organisation weiterer notwendiger Umbaumaßnahmen</li>
+                        </ul>
+
+                        <h5 class="font-bold text-gray-800 mt-4">Unterstützung beim Umzug</h5>
+                        <p>Wenn die bisherige Wohnung nicht mehr geeignet ist oder ein Umzug notwendig wird, unterstützen wir Senioren und ihre Angehörigen bei der Organisation und Vorbereitung. Wir helfen beispielsweise bei:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>der Planung des Umzugs</li>
+                            <li>der Organisation notwendiger Veränderungen in der neuen Wohnung</li>
+                            <li>der Koordination verschiedener Ansprechpartner und Dienstleister</li>
+                            <li>der Vorbereitung des neuen Zuhauses auf die individuellen Bedürfnisse des Seniors</li>
+                            <li>dem Ankommen und Einrichten im neuen Zuhause</li>
+                        </ul>
+                        
+                        <p class="font-semibold text-primary mt-2">Persönlich. Sicher. Individuell.</p>
+                        <p>Wir möchten, dass Senioren möglichst lange sicher, selbstbestimmt und mit Lebensqualität in ihrem Zuhause leben können. Deshalb begleiten wir nicht nur den Menschen – sondern schaffen gemeinsam mit ihm und seinen Angehörigen ein Zuhause, in dem er sich sicher und wohlfühlen kann.</p>
+                    </div>
+
+                    <div class="mt-auto pt-4 text-secondary font-bold flex items-center gap-2 group-hover:text-primary transition select-none">
+                        <span class="btn-text">Mehr anzeigen</span> <i class="fas fa-chevron-down toggle-icon transition-transform duration-300"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Standorte -->
+    <section id="standorte" class="py-20 bg-primary text-white">
+        <div class="container mx-auto px-4 reveal">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 space-y-6">
+                    <h2 class="text-3xl font-bold">Unser Einsatzgebiet</h2>
+                    <div class="w-16 h-1 bg-secondary rounded"></div>
+                    <p class="text-gray-300 text-lg">Die PolHerz GmbH hat ihren Hauptsitz in Willich. Von hier aus koordinieren wir unsere Pflegekräfte, um eine schnelle und zuverlässige Versorgung in der Region sicherzustellen.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-secondary"></i> Willich</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-secondary"></i> Meerbusch</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-secondary"></i> Kaarst</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-secondary"></i> Viersen</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-plus text-secondary"></i> Angrenzende Gebiete auf Anfrage</li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 bg-white rounded-2xl p-2 shadow-2xl h-64 md:h-96 w-full relative">
+                    <iframe class="absolute inset-0 w-full h-full rounded-xl" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Linsellesstra%C3%9Fe%20142,%2047877%20Willich&t=&z=14&ie=UTF8&iwloc=&output=embed" title="Karte zu PolHerz GmbH Willich"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-3xl reveal">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Häufig gestellte Fragen</h2>
+                <div class="w-16 h-1 bg-secondary rounded mx-auto"></div>
+            </div>
+            <div class="space-y-4">
+                <details class="group bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-all duration-300">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-primary outline-none">
+                        <h4 class="text-lg font-bold">Wer übernimmt die Kosten für den Pflegedienst?</h4>
+                        <span class="shrink-0 bg-pink-100 rounded-full p-2 text-secondary group-open:bg-primary group-open:text-white transition-colors duration-300"><i class="fas fa-plus group-open:hidden w-4 h-4 flex items-center justify-center"></i><i class="fas fa-minus hidden group-open:block w-4 h-4 flex items-center justify-center"></i></span>
+                    </summary>
+                    <p class="mt-4 leading-relaxed text-gray-600 border-t border-gray-100 pt-4">Bei Vorliegen eines Pflegegrades werden die Kosten für die Grundpflege im Rahmen der Sachleistungen von der Pflegekasse bis zu einem bestimmten Höchstbetrag übernommen.</p>
+                </details>
+                <details class="group bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-all duration-300">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-primary outline-none">
+                        <h4 class="text-lg font-bold">Kommen immer dieselben Pflegekräfte?</h4>
+                        <span class="shrink-0 bg-pink-100 rounded-full p-2 text-secondary group-open:bg-primary group-open:text-white transition-colors duration-300"><i class="fas fa-plus group-open:hidden w-4 h-4 flex items-center justify-center"></i><i class="fas fa-minus hidden group-open:block w-4 h-4 flex items-center justify-center"></i></span>
+                    </summary>
+                    <p class="mt-4 leading-relaxed text-gray-600 border-t border-gray-100 pt-4">Wir bemühen uns sehr um Bezugspflege. Das bedeutet, dass wir versuchen, ein kleines, festes Team für jeden Patienten einzuteilen, um Vertrauen aufzubauen.</p>
+                </details>
+                <details class="group bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-all duration-300">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-primary outline-none">
+                        <h4 class="text-lg font-bold">Wie schnell können Sie mit der Pflege beginnen?</h4>
+                        <span class="shrink-0 bg-pink-100 rounded-full p-2 text-secondary group-open:bg-primary group-open:text-white transition-colors duration-300"><i class="fas fa-plus group-open:hidden w-4 h-4 flex items-center justify-center"></i><i class="fas fa-minus hidden group-open:block w-4 h-4 flex items-center justify-center"></i></span>
+                    </summary>
+                    <p class="mt-4 leading-relaxed text-gray-600 border-t border-gray-100 pt-4">In dringenden Fällen können wir oft innerhalb von 24 bis 48 Stunden nach einem Erstgespräch und der Bedarfsermittlung starten. Kontaktieren Sie uns dafür am besten direkt telefonisch.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Karriere -->
+    <section id="karriere" class="py-20 bg-white border-t border-gray-200">
+        <div class="container mx-auto px-4 text-center reveal">
+            <h2 class="text-3xl font-bold text-primary mb-4">Werde Teil unseres Teams</h2>
+            <div class="w-16 h-1 bg-secondary rounded mx-auto mb-6"></div>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8 text-lg">Wir suchen stets engagierte Pflegefachkräfte und Pflegehilfskräfte (m/w/d), die mit Herzblut arbeiten. Wir bieten faire Bezahlung, flexible Arbeitszeiten und ein familiäres Arbeitsklima.</p>
+            <a href="index.html#kontakt" class="inline-block bg-primary text-white font-bold py-3 px-8 rounded-full hover:bg-secondary transition duration-300 shadow-md">Jetzt bewerben</a>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 reveal">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Kontaktieren Sie uns</h2>
+                <div class="w-16 h-1 bg-secondary rounded mx-auto mb-6"></div>
+                <p class="text-gray-600 text-lg">Wir beraten Sie gerne unverbindlich. Rufen Sie uns an, schreiben Sie eine WhatsApp oder nutzen Sie unser Kontaktformular.</p>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
+                <div class="lg:w-1/3 space-y-8 bg-primary text-white p-8 rounded-2xl shadow-xl">
+                    <h3 class="text-2xl font-bold mb-6 border-b border-gray-600 pb-4">Kontaktdaten</h3>
+                    <div class="flex items-start gap-4"><i class="fas fa-building text-secondary text-xl mt-1"></i><div><p class="font-bold">PolHerz GmbH</p><p class="text-gray-300">Linsellesstraße 142<br>47877 Willich</p></div></div>
+                    <div class="flex items-center gap-4"><i class="fas fa-phone text-secondary text-xl"></i><div><p class="font-bold">Telefon</p><a href="tel:+490000000000" class="text-gray-300 hover:text-white transition">+49 xxxx xxx xxx</a></div></div>
+                    <div class="flex items-center gap-4"><i class="fab fa-whatsapp text-secondary text-xl"></i><div><p class="font-bold">WhatsApp</p><a href="https://wa.me/490000000000" target="_blank" class="text-gray-300 hover:text-white transition">Nachricht senden</a></div></div>
+                    <div class="flex items-center gap-4"><i class="fas fa-fax text-secondary text-xl"></i><div><p class="font-bold">Fax</p><p class="text-gray-300">...</p></div></div>
+                    <div class="flex items-center gap-4"><i class="fas fa-envelope text-secondary text-xl"></i><div><p class="font-bold">E-Mail</p><a href="mailto:polherznrw@gmail.com" class="text-gray-300 hover:text-white transition">polherznrw@gmail.com</a></div></div>
+                </div>
+
+                <!-- Web3Forms Contact Form -->
+                <div class="lg:w-2/3 bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+                    <h3 class="text-2xl font-bold text-primary mb-6">Nachricht senden</h3>
+                    <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+                        <input type="hidden" name="access_key" value="31852556-cc82-4f56-93b9-3770289f4039">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        <input type="hidden" name="subject" value="Neue Anfrage über die PolHerz Website">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Ihr Name *</label>
+                                <input type="text" name="name" id="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition" placeholder="Max Mustermann">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Telefonnummer *</label>
+                                <input type="tel" name="phone" id="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition" placeholder="Für Rückrufe">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-Mail Adresse</label>
+                            <input type="email" name="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition" placeholder="beispiel@mail.de">
+                        </div>
+
+                        <div>
+                            <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Kategorie der Anfrage *</label>
+                            <select name="category" id="category" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition bg-white appearance-none">
+                                <option value="" disabled selected>Bitte wählen Sie eine Kategorie</option>
+                                <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+                                <option value="Pflegeberatung">Pflegeberatung & Grundpflege</option>
+                                <option value="Bewerbung und Karriere">Bewerbung & Karriere</option>
+                                <option value="Sonstiges">Sonstiges</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Wie können wir Ihnen helfen? *</label>
+                            <textarea name="message" id="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition" placeholder="Bitte beschreiben Sie kurz Ihr Anliegen..."></textarea>
+                        </div>
+                        
+                        <div class="flex items-start gap-2">
+                            <input type="checkbox" id="datenschutz" required class="mt-1 text-secondary focus:ring-secondary">
+                            <label for="datenschutz" class="text-sm text-gray-600">
+                                Ich habe die <a href="dsgvo.html" class="text-secondary underline hover:text-primary transition">Datenschutzerklärung</a> zur Kenntnis genommen und stimme zu, dass meine Angaben zur Kontaktaufnahme gespeichert werden.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-secondary transition duration-300 shadow-md">
+                            Nachricht absenden
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h4 class="text-white text-xl font-bold mb-4">Pol<span class="text-secondary">Herz</span> GmbH</h4>
+                <p class="text-sm">Ein polnisches Herz für alle.<br>Ihr ambulanter Pflegedienst in Nordrhein-Westfalen.</p>
+            </div>
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4">Rechtliches</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="impressum.html" class="hover:text-secondary transition">Impressum</a></li>
+                    <li><a href="dsgvo.html" class="hover:text-secondary transition">Datenschutzerklärung (DSGVO)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4">Öffnungszeiten Büro</h4>
+                <p class="text-sm">Montag - Freitag: 08:00 - 16:00 Uhr<br>Pflegebereitschaft: 24/7 telefonisch erreichbar.</p>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+            &copy; 2026 PolHerz GmbH. Alle Rechte vorbehalten.
+        </div>
+    </footer>
+
+    <!-- DSGVO Cookie Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-5px_20px_rgba(0,0,0,0.1)] z-50 transform transition-transform duration-500 translate-y-0">
+        <div class="container mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-gray-700">
+                <strong>Wir verwenden Cookies!</strong> Diese Website verwendet essentielle Cookies, um die ordnungsgemäße Funktion sicherzustellen. Weitere Informationen finden Sie in unserer <a href="dsgvo.html" class="text-secondary underline hover:text-primary transition">Datenschutzerklärung</a>.
+            </div>
+            <div class="flex gap-4 shrink-0">
+                <button onclick="acceptCookies()" class="bg-primary text-white px-6 py-2 rounded font-medium hover:bg-secondary transition">Verstanden</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.classList.add('hidden')));
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        let currentFontSize = 100; 
+        function changeFontSize(step) {
+            currentFontSize += (step * 10);
+            if (currentFontSize < 90) currentFontSize = 90;
+            if (currentFontSize > 150) currentFontSize = 150;
+            document.documentElement.style.fontSize = currentFontSize + '%'; 
+        }
+        function toggleContrast() { document.documentElement.classList.toggle('high-contrast'); }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (localStorage.getItem("cookieAccepted") === "true") {
+                document.getElementById("cookie-banner").style.display = "none";
+            }
+        });
+
+        function acceptCookies() { 
+            localStorage.setItem("cookieAccepted", "true");
+            const banner = document.getElementById('cookie-banner');
+            banner.style.transform = 'translateY(100%)'; 
+            setTimeout(() => { banner.style.display = 'none'; }, 500);
+        }
+
+        // Updated Toggle Service Function (now applied to the parent card)
+        function toggleService(card) {
+            const content = card.querySelector('.hidden-content');
+            const textSpan = card.querySelector('.btn-text');
+            const icon = card.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                content.classList.add('flex');
+                textSpan.textContent = 'Weniger anzeigen';
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                content.classList.remove('flex');
+                textSpan.textContent = 'Mehr anzeigen';
+                icon.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</body>
+</html>

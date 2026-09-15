@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Datenschutzerklärung der PolHerz GmbH">
+    <title>Datenschutzerklärung | PolHerz GmbH</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: { colors: { primary: '#091c3c', secondary: '#e58ba5', accent: '#ffffff', }, fontFamily: { sans: ['Inter', 'sans-serif'], } }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        html.high-contrast, html.high-contrast * { background-color: #121212 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen relative">
+
+    <!-- Accessibility Toolbar -->
+    <div class="fixed left-0 top-1/4 z-50 bg-white shadow-lg border border-gray-200 rounded-r-lg flex flex-col p-2 space-y-3" aria-label="Barrierefreiheit">
+        <button onclick="changeFontSize(1)" class="text-primary hover:text-secondary p-2 transition" aria-label="Text vergrößern" title="Text vergrößern"><i class="fas fa-search-plus fa-lg"></i></button>
+        <button onclick="changeFontSize(-1)" class="text-primary hover:text-secondary p-2 transition" aria-label="Text verkleinern" title="Text verkleinern"><i class="fas fa-search-minus fa-lg"></i></button>
+        <button onclick="toggleContrast()" class="text-primary hover:text-secondary p-2 transition" aria-label="Hoher Kontrast" title="Kontrast umschalten"><i class="fas fa-adjust fa-lg"></i></button>
+    </div>
+
+    <!-- Sticky Navigation (IDENTICAL ACROSS ALL FILES) -->
+    <header class="sticky top-0 z-40 bg-primary text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <i class="fas fa-heart-pulse text-secondary text-3xl"></i>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-wide">Pol<span class="text-secondary">Herz</span></h1>
+                    <p class="text-xs text-gray-300">AMBULANTER PFLEGEDIENST</p>
+                </div>
+            </a>
+            <nav class="hidden md:flex space-x-6 font-medium">
+                <a href="index.html#ueber-uns" class="hover:text-secondary transition duration-300">Über uns</a>
+                <a href="index.html#leistungen" class="hover:text-secondary transition duration-300">Leistungen</a>
+                <a href="index.html#standorte" class="hover:text-secondary transition duration-300">Standorte</a>
+                <a href="index.html#faq" class="hover:text-secondary transition duration-300">FAQ</a>
+                <a href="index.html#karriere" class="hover:text-secondary transition duration-300">Karriere</a>
+                <a href="index.html#kontakt" class="hover:text-secondary transition duration-300">Kontakt</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Menü öffnen"><i class="fas fa-bars text-2xl"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-primary pb-4 px-4 space-y-3 shadow-inner">
+            <a href="index.html#ueber-uns" class="block text-white hover:text-secondary transition">Über uns</a>
+            <a href="index.html#leistungen" class="block text-white hover:text-secondary transition">Leistungen</a>
+            <a href="index.html#standorte" class="block text-white hover:text-secondary transition">Standorte</a>
+            <a href="index.html#faq" class="block text-white hover:text-secondary transition">FAQ</a>
+            <a href="index.html#karriere" class="block text-white hover:text-secondary transition">Karriere</a>
+            <a href="index.html#kontakt" class="block text-white hover:text-secondary transition">Kontakt</a>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <main class="flex-grow container mx-auto px-4 py-16 max-w-4xl">
+        <h1 class="text-4xl font-bold text-primary mb-2">Datenschutzerklärung</h1>
+        <div class="w-16 h-1 bg-secondary rounded mb-10"></div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 space-y-8 text-gray-700 leading-relaxed">
+            
+            <section>
+                <h2 class="text-2xl font-bold text-primary mb-4">1. Datenschutz auf einen Blick</h2>
+                <h3 class="text-lg font-semibold mt-4 mb-2">Allgemeine Hinweise</h3>
+                <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-primary mb-4">2. Allgemeine Hinweise und Pflichtinformationen</h2>
+                
+                <h3 class="text-lg font-semibold mt-4 mb-2">Hinweis zur verantwortlichen Stelle</h3>
+                <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
+                <div class="bg-gray-50 p-4 border-l-4 border-secondary my-3">
+                    <p><strong>PolHerz GmbH</strong></p>
+                    <p>Linsellesstraße 142</p>
+                    <p>47877 Willich</p>
+                    <p>Telefon: +49 xxxx xxx xxx</p>
+                    <p>E-Mail: polherznrw@gmail.com</p>
+                </div>
+
+                <h3 class="text-lg font-semibold mt-6 mb-2">Datenschutzbeauftragter</h3>
+                <p>Wir haben für unser Unternehmen einen Datenschutzbeauftragten benannt (falls gesetzlich vorgeschrieben):</p>
+                <p class="text-red-600 font-bold bg-red-50 p-2 inline-block rounded mt-1">
+                    [PROSZĘ WPISAĆ TUTAJ: IMIĘ, NAZWISKO I DANE KONTAKTOWE INSPEKTORA OCHRONY DANYCH LUB USUNĄĆ TEN AKAPIT, JEŚLI NIE JEST WYMAGANY]
+                </p>
+                
+                <h3 class="text-lg font-semibold mt-4 mb-2">Hosting</h3>
+                <p class="text-red-600 font-bold bg-red-50 p-2 inline-block rounded mt-1">
+                    [PROSZĘ WPISAĆ TUTAJ: NAZWA I ADRES DOSTAWCY HOSTINGU/SERWERA, np. Strato, IONOS, OVH, itd.]
+                </p>
+                <p class="mt-2">Wir hosten unsere Website bei dem oben genannten Anbieter. Die personenbezogenen Daten, die auf dieser Website erfasst werden, werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v. a. um IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten und sonstige über eine Website generierte Daten handeln.</p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-primary mb-4">3. Datenerfassung auf dieser Website</h2>
+                
+                <h3 class="text-lg font-semibold mt-4 mb-2">Cookies & Local Storage</h3>
+                <p>Unsere Website verwendet "Cookies" bzw. ähnliche Technologien (wie den Local Storage Ihres Browsers), um Ihre Einstellungen (z. B. die Bestätigung des Cookie-Banners) zu speichern. Diese Technologien richten auf Ihrem Endgerät keinen Schaden an und enthalten keine Viren. Wir nutzen auf dieser Website ausschließlich technisch notwendige Elemente, um die ordnungsgemäße Funktion sicherzustellen.</p>
+
+                <h3 class="text-lg font-semibold mt-4 mb-2">Kontaktformular (Web3Forms)</h3>
+                <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage bei uns gespeichert. Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. <br><br>
+                Die Übermittlung der Formulardaten erfolgt über die externe API des Dienstleisters <strong>Web3Forms</strong> (Surjith S M, Web3Forms). Die Datenübertragung erfolgt verschlüsselt. Weitere Informationen finden Sie in der Datenschutzerklärung von Web3Forms unter: <a href="https://web3forms.com/privacy" target="_blank" class="text-secondary underline">https://web3forms.com/privacy</a>.</p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-primary mb-4">4. Plugins und Tools</h2>
+                
+                <h3 class="text-lg font-semibold mt-4 mb-2">Google Maps</h3>
+                <p>Diese Seite nutzt den Kartendienst Google Maps (bereitgestellt über ein Iframe). Anbieter ist die Google Ireland Limited („Google“), Gordon House, Barrow Street, Dublin 4, Irland. Zur Nutzung der Funktionen von Google Maps ist es notwendig, Ihre IP-Adresse zu speichern. Diese Informationen werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Der Anbieter dieser Seite hat keinen Einfluss auf diese Datenübertragung. Die Nutzung von Google Maps erfolgt im Interesse einer ansprechenden Darstellung unserer Online-Angebote und an einer leichten Auffindbarkeit der von uns auf der Website angegebenen Orte. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar.</p>
+
+                <h3 class="text-lg font-semibold mt-4 mb-2">Google Web Fonts</h3>
+                <p>Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Web Fonts, die von Google bereitgestellt werden. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Web Fonts in ihren Browsercache, um Texte und Schriftarten korrekt anzuzeigen. Zu diesem Zweck muss der von Ihnen verwendete Browser Verbindung zu den Servern von Google aufnehmen. Hierdurch erlangt Google Kenntnis darüber, dass über Ihre IP-Adresseunsere Website aufgerufen wurde. Die Nutzung von Google Web Fonts erfolgt im Interesse einer einheitlichen und ansprechenden Darstellung unserer Online-Angebote. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Weitere Informationen zu Google Web Fonts finden Sie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" class="text-secondary underline">https://policies.google.com/privacy</a>.</p>
+
+                <h3 class="text-lg font-semibold mt-4 mb-2">Externe Content Delivery Networks (CDN)</h3>
+                <p>Wir nutzen für die Bereitstellung unserer Website externe CDNs (Content Delivery Networks). Dies betrifft insbesondere das CSS-Framework <strong>Tailwind CSS</strong> (geladen über cdn.tailwindcss.com) sowie Icons von <strong>FontAwesome</strong> (geladen über cdnjs.cloudflare.com). Ein CDN ist ein Dienst, mit dessen Hilfe Inhalte unseres Onlineangebotes, insbesondere große Mediendateien oder Skripte, mit Hilfe regional verteilter und über das Internet verbundener Server schneller ausgeliefert werden. <br><br>
+                Durch die Einbindung dieser Dienste werden beim Aufruf unserer Website Verbindungen zu den Servern dieser Anbieter aufgebaut. Hierbei wird Ihre IP-Adresse an diese Anbieter übermittelt. Dies erfolgt auf Grundlage unseres berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO) an einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebotes.</p>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-primary mb-4">5. Ihre Rechte</h2>
+                <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 mt-auto">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h4 class="text-white text-xl font-bold mb-4">Pol<span class="text-secondary">Herz</span> GmbH</h4>
+                <p class="text-sm">Ein polnisches Herz für alle.<br>Ihr ambulanter Pflegedienst in Nordrhein-Westfalen.</p>
+            </div>
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4">Rechtliches</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="impressum.html" class="hover:text-secondary transition">Impressum</a></li>
+                    <li><a href="dsgvo.html" class="hover:text-secondary transition">Datenschutzerklärung (DSGVO)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4">Öffnungszeiten Büro</h4>
+                <p class="text-sm">Montag - Freitag: 08:00 - 16:00 Uhr<br>Pflegebereitschaft: 24/7 telefonisch erreichbar.</p>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+            &copy; 2026 PolHerz GmbH. Alle Rechte vorbehalten.
+        </div>
+    </footer>
+
+    <!-- DSGVO Cookie Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-5px_20px_rgba(0,0,0,0.1)] z-50 transform transition-transform duration-500 translate-y-0">
+        <div class="container mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-gray-700">
+                <strong>Wir verwenden Cookies!</strong> Diese Website verwendet essentielle Cookies, um die ordnungsgemäße Funktion sicherzustellen. Weitere Informationen finden Sie in unserer <a href="dsgvo.html" class="text-secondary underline hover:text-primary transition">Datenschutzerklärung</a>.
+            </div>
+            <div class="flex gap-4 shrink-0">
+                <button onclick="acceptCookies()" class="bg-primary text-white px-6 py-2 rounded font-medium hover:bg-secondary transition">Verstanden</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts with LocalStorage for Cookies -->
+    <script>
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+        menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.classList.add('hidden')));
+        
+        let currentFontSize = 100; 
+        function changeFontSize(step) {
+            currentFontSize += (step * 10);
+            if (currentFontSize < 90) currentFontSize = 90;
+            if (currentFontSize > 150) currentFontSize = 150;
+            document.documentElement.style.fontSize = currentFontSize + '%'; 
+        }
+        function toggleContrast() { document.documentElement.classList.toggle('high-contrast'); }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            if (localStorage.getItem("cookieAccepted") === "true") {
+                document.getElementById("cookie-banner").style.display = "none";
+            }
+        });
+
+        function acceptCookies() { 
+            localStorage.setItem("cookieAccepted", "true");
+            const banner = document.getElementById('cookie-banner');
+            banner.style.transform = 'translateY(100%)'; 
+            setTimeout(() => { banner.style.display = 'none'; }, 500);
+        }
+    </script>
+</body>
+</html>
