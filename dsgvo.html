@@ -24,44 +24,58 @@
 <body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen relative">
 
     <!-- Accessibility Toolbar -->
-    <div class="fixed left-0 top-1/4 z-50 bg-white shadow-lg border border-gray-200 rounded-r-lg flex flex-col p-2 space-y-3" aria-label="Barrierefreiheit">
-        <button onclick="changeFontSize(1)" class="text-primary hover:text-secondary p-2 transition" aria-label="Text vergrößern" title="Text vergrößern"><i class="fas fa-search-plus fa-lg"></i></button>
-        <button onclick="changeFontSize(-1)" class="text-primary hover:text-secondary p-2 transition" aria-label="Text verkleinern" title="Text verkleinern"><i class="fas fa-search-minus fa-lg"></i></button>
-        <button onclick="toggleContrast()" class="text-primary hover:text-secondary p-2 transition" aria-label="Hoher Kontrast" title="Kontrast umschalten"><i class="fas fa-adjust fa-lg"></i></button>
+    <div class="fixed left-0 top-1/4 z-50 flex items-start" aria-label="Barrierefreiheit">
+        <div id="a11y-menu" class="bg-white shadow-lg border-y border-r border-gray-200 rounded-br-lg md:rounded-r-lg flex-col p-0 space-y-2 transition-all duration-300 overflow-hidden w-0 opacity-0 md:w-auto md:opacity-100 md:flex md:p-2 items-center justify-center">
+            <button onclick="changeFontSize(1)" class="text-primary hover:text-secondary p-3 transition whitespace-nowrap" aria-label="Text vergrößern" title="Text vergrößern"><i class="fas fa-search-plus fa-lg"></i></button>
+            <button onclick="changeFontSize(-1)" class="text-primary hover:text-secondary p-3 transition whitespace-nowrap" aria-label="Text verkleinern" title="Text verkleinern"><i class="fas fa-search-minus fa-lg"></i></button>
+            <button onclick="toggleContrast()" class="text-primary hover:text-secondary p-3 transition whitespace-nowrap" aria-label="Hoher Kontrast" title="Kontrast umschalten"><i class="fas fa-adjust fa-lg"></i></button>
+        </div>
+        <button onclick="toggleA11y()" class="bg-white shadow-lg border-y border-r border-gray-200 rounded-r-lg p-3 text-primary hover:text-secondary transition md:hidden flex items-center justify-center ml-[-1px]" aria-label="Barrierefreiheit Menü umschalten">
+            <i class="fas fa-universal-access fa-xl"></i>
+        </button>
     </div>
 
-    <!-- Sticky Navigation (IDENTICAL ACROSS ALL FILES) -->
+    <!-- Sticky Navigation -->
     <header class="sticky top-0 z-40 bg-primary text-white shadow-md">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2">
-                <i class="fas fa-heart-pulse text-secondary text-3xl"></i>
+            <a href="index.html" class="flex items-center space-x-2 shrink-0">
+                <i class="fas fa-heart-pulse text-secondary text-2xl md:text-3xl"></i>
                 <div>
-                    <h1 class="text-2xl font-bold tracking-wide">Pol<span class="text-secondary">Herz</span></h1>
-                    <p class="text-xs text-gray-300">AMBULANTER PFLEGEDIENST</p>
+                    <h1 class="notranslate text-xl md:text-2xl font-bold tracking-wide">Pol<span class="text-secondary">Herz</span></h1>
+                    <p class="text-[10px] md:text-xs text-gray-300 hidden sm:block">AMBULANTER PFLEGEDIENST</p>
                 </div>
             </a>
-            <nav class="hidden md:flex space-x-6 font-medium">
-                <a href="index.html#ueber-uns" class="hover:text-secondary transition duration-300">Über uns</a>
-                <a href="index.html#leistungen" class="hover:text-secondary transition duration-300">Leistungen</a>
-                <a href="index.html#standorte" class="hover:text-secondary transition duration-300">Standorte</a>
-                <a href="index.html#faq" class="hover:text-secondary transition duration-300">FAQ</a>
-                <a href="index.html#karriere" class="hover:text-secondary transition duration-300">Karriere</a>
-                <a href="index.html#kontakt" class="hover:text-secondary transition duration-300">Kontakt</a>
-            </nav>
-            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Menü öffnen"><i class="fas fa-bars text-2xl"></i></button>
+            
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <nav class="hidden md:flex space-x-6 font-medium items-center">
+                    <a href="index.html#ueber-uns" class="hover:text-secondary transition duration-300">Über uns</a>
+                    <a href="index.html#leistungen" class="hover:text-secondary transition duration-300">Leistungen</a>
+                    <a href="index.html#standorte" class="hover:text-secondary transition duration-300">Standorte</a>
+                    <a href="index.html#faq" class="notranslate hover:text-secondary transition duration-300">FAQ</a>
+                    <a href="index.html#karriere" class="hover:text-secondary transition duration-300">Karriere</a>
+                    <a href="index.html#kontakt" class="hover:text-secondary transition duration-300">Kontakt</a>
+                </nav>
+
+                <!-- Modern GTranslate Widget (Popup version) -->
+                <div class="gtranslate_wrapper shrink-0 z-50 flex items-center"></div>
+
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none shrink-0" aria-label="Menü öffnen">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
         </div>
+
         <div id="mobile-menu" class="hidden md:hidden bg-primary pb-4 px-4 space-y-3 shadow-inner">
             <a href="index.html#ueber-uns" class="block text-white hover:text-secondary transition">Über uns</a>
             <a href="index.html#leistungen" class="block text-white hover:text-secondary transition">Leistungen</a>
             <a href="index.html#standorte" class="block text-white hover:text-secondary transition">Standorte</a>
-            <a href="index.html#faq" class="block text-white hover:text-secondary transition">FAQ</a>
+            <a href="index.html#faq" class="notranslate block text-white hover:text-secondary transition">FAQ</a>
             <a href="index.html#karriere" class="block text-white hover:text-secondary transition">Karriere</a>
             <a href="index.html#kontakt" class="block text-white hover:text-secondary transition">Kontakt</a>
         </div>
     </header>
 
-    <!-- Content Section -->
-    <main class="flex-grow container mx-auto px-4 py-16 max-w-4xl">
+    <main class="notranslate flex-grow container mx-auto px-4 py-16 max-w-4xl">
         <h1 class="text-4xl font-bold text-primary mb-2">Datenschutzerklärung</h1>
         <div class="w-16 h-1 bg-secondary rounded mb-10"></div>
 
@@ -122,6 +136,9 @@
                 <h3 class="text-lg font-semibold mt-4 mb-2">Externe Content Delivery Networks (CDN)</h3>
                 <p>Wir nutzen für die Bereitstellung unserer Website externe CDNs (Content Delivery Networks). Dies betrifft insbesondere das CSS-Framework <strong>Tailwind CSS</strong> (geladen über cdn.tailwindcss.com) sowie Icons von <strong>FontAwesome</strong> (geladen über cdnjs.cloudflare.com). Ein CDN ist ein Dienst, mit dessen Hilfe Inhalte unseres Onlineangebotes, insbesondere große Mediendateien oder Skripte, mit Hilfe regional verteilter und über das Internet verbundener Server schneller ausgeliefert werden. <br><br>
                 Durch die Einbindung dieser Dienste werden beim Aufruf unserer Website Verbindungen zu den Servern dieser Anbieter aufgebaut. Hierbei wird Ihre IP-Adresse an diese Anbieter übermittelt. Dies erfolgt auf Grundlage unseres berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO) an einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebotes.</p>
+
+                <h3 class="text-lg font-semibold mt-4 mb-2">GTranslate</h3>
+                <p>Auf dieser Website wird der Dienst "GTranslate" zur Übersetzung der Website-Inhalte in verschiedene Sprachen genutzt. Bei der Nutzung dieses Dienstes kann es zu einer Übertragung Ihrer IP-Adresse und der besuchten Seite an die Server des Anbieters (GTranslate Inc.) kommen. Dies erfolgt auf Grundlage unseres berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO), unsere Website einem internationalen und mehrsprachigen Publikum barrierearm zur Verfügung zu stellen.</p>
             </section>
 
             <section>
@@ -135,14 +152,14 @@
     <footer class="bg-gray-900 text-gray-400 py-12 mt-auto">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
-                <h4 class="text-white text-xl font-bold mb-4">Pol<span class="text-secondary">Herz</span> GmbH</h4>
+                <h4 class="notranslate text-white text-xl font-bold mb-4">Pol<span class="text-secondary">Herz</span> GmbH</h4>
                 <p class="text-sm">Ein polnisches Herz für alle.<br>Ihr ambulanter Pflegedienst in Nordrhein-Westfalen.</p>
             </div>
             <div>
-                <h4 class="text-white text-lg font-bold mb-4">Rechtliches</h4>
+                <h4 class="notranslate text-white text-lg font-bold mb-4">Rechtliches</h4>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="impressum.html" class="hover:text-secondary transition">Impressum</a></li>
-                    <li><a href="dsgvo.html" class="hover:text-secondary transition">Datenschutzerklärung (DSGVO)</a></li>
+                    <li><a href="impressum.html" class="notranslate hover:text-secondary transition">Impressum</a></li>
+                    <li><a href="dsgvo.html" class="notranslate hover:text-secondary transition">Datenschutzerklärung (DSGVO)</a></li>
                 </ul>
             </div>
             <div>
@@ -150,7 +167,7 @@
                 <p class="text-sm">Montag - Freitag: 08:00 - 16:00 Uhr<br>Pflegebereitschaft: 24/7 telefonisch erreichbar.</p>
             </div>
         </div>
-        <div class="container mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+        <div class="notranslate container mx-auto px-4 mt-8 pt-8 border-t border-gray-800 text-center text-sm">
             &copy; 2026 PolHerz GmbH. Alle Rechte vorbehalten.
         </div>
     </footer>
@@ -167,7 +184,11 @@
         </div>
     </div>
 
-    <!-- Scripts with LocalStorage for Cookies -->
+    <!-- Official GTranslate Script with Flag Size 24 -->
+    <script>window.gtranslateSettings = {"default_language":"de","native_language_names":true,"languages":["de","en","pl","tr","ru","ar","uk","it","ku","ro"],"wrapper_selector":".gtranslate_wrapper","flag_size":24}</script>
+    <script src="https://cdn.gtranslate.net/widgets/latest/ps.js" defer></script>
+
+    <!-- UI Scripts -->
     <script>
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
@@ -194,6 +215,17 @@
             const banner = document.getElementById('cookie-banner');
             banner.style.transform = 'translateY(100%)'; 
             setTimeout(() => { banner.style.display = 'none'; }, 500);
+        }
+
+        function toggleA11y() {
+            const menu = document.getElementById('a11y-menu');
+            if (menu.classList.contains('w-0')) {
+                menu.classList.remove('w-0', 'opacity-0', 'p-0');
+                menu.classList.add('w-14', 'opacity-100', 'p-1', 'flex'); 
+            } else {
+                menu.classList.add('w-0', 'opacity-0', 'p-0');
+                menu.classList.remove('w-14', 'opacity-100', 'p-1', 'flex'); 
+            }
         }
     </script>
 </body>
