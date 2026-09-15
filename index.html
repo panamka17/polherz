@@ -32,15 +32,6 @@
         html.high-contrast, html.high-contrast * { background-color: #121212 !important; color: #ffff00 !important; border-color: #ffff00 !important; }
         html.high-contrast img, html.high-contrast iframe { filter: grayscale(100%) contrast(120%); }
         details > summary::-webkit-details-marker { display: none; }
-
-        /* Custom Scrollbar for Language Menu */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #091c3c; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e58ba5; border-radius: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d0708f; }
-
-        /* Hide the native GTranslate Widget fully */
-        .gtranslate_wrapper { display: none !important; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased relative">
@@ -70,7 +61,7 @@
             </a>
             
             <!-- Right-aligned Elements Container -->
-            <div class="flex items-center space-x-4 md:space-x-6">
+            <div class="flex items-center space-x-3 md:space-x-6">
                 <!-- Desktop Nav Tabs -->
                 <nav class="hidden md:flex space-x-6 font-medium items-center">
                     <a href="index.html#ueber-uns" class="hover:text-secondary transition duration-300">Über uns</a>
@@ -81,30 +72,8 @@
                     <a href="index.html#kontakt" class="hover:text-secondary transition duration-300">Kontakt</a>
                 </nav>
 
-                <!-- Custom Language Dropdown (Replaces default widget) -->
-                <div class="relative inline-block text-left" id="custom-lang-container">
-                    <button type="button" class="flex items-center gap-2 bg-primary border border-secondary rounded-md px-3 py-1.5 text-sm font-medium text-white hover:bg-secondary hover:text-primary focus:outline-none transition group" onclick="toggleLangMenu(event)">
-                        <i class="fas fa-globe text-secondary group-hover:text-primary transition"></i>
-                        <span id="current-lang-display">DE</span>
-                        <i class="fas fa-chevron-down text-[10px] text-white group-hover:text-primary transition"></i>
-                    </button>
-                    <!-- Dropdown List -->
-                    <div id="lang-menu" class="absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-primary shadow-xl border border-secondary focus:outline-none hidden flex-col z-50 max-h-64 overflow-y-auto custom-scrollbar">
-                        <a href="#" onclick="changeGTranslate('de', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Deutsch (DE)</a>
-                        <a href="#" onclick="changeGTranslate('en', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">English (EN)</a>
-                        <a href="#" onclick="changeGTranslate('pl', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Polski (PL)</a>
-                        <a href="#" onclick="changeGTranslate('tr', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Türkçe (TR)</a>
-                        <a href="#" onclick="changeGTranslate('ru', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Русский (RU)</a>
-                        <a href="#" onclick="changeGTranslate('ar', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">العربية (AR)</a>
-                        <a href="#" onclick="changeGTranslate('uk', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Українська (UK)</a>
-                        <a href="#" onclick="changeGTranslate('it', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Italiano (IT)</a>
-                        <a href="#" onclick="changeGTranslate('ku', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Kurdî (KU)</a>
-                        <a href="#" onclick="changeGTranslate('ro', event)" class="block px-4 py-2 text-sm text-white hover:bg-secondary hover:text-primary transition">Română (RO)</a>
-                    </div>
-                </div>
-
-                <!-- Hidden Actual GTranslate Element -->
-                <div class="gtranslate_wrapper"></div>
+                <!-- GTranslate Widget Wrapper -->
+                <div class="gtranslate_wrapper shrink-0 relative z-50" style="min-width: 120px;"></div>
 
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none shrink-0" aria-label="Menü öffnen">
@@ -472,62 +441,17 @@
         </div>
     </div>
 
-    <!-- Official GTranslate Script -->
+    <!-- CLEAN GTranslate Widget Scripts -->
     <script>window.gtranslateSettings = {"default_language":"de","languages":["de","en","pl","tr","ru","ar","uk","it","ku","ro"],"wrapper_selector":".gtranslate_wrapper"}</script>
     <script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>
 
-    <!-- Custom Script Logic -->
+    <!-- UI Scripts -->
     <script>
-        // Custom Language Selector Function
-        function toggleLangMenu(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            document.getElementById('lang-menu').classList.toggle('hidden');
-        }
-
-        // Close lang menu if clicking outside
-        document.addEventListener('click', function(event) {
-            const langContainer = document.getElementById('custom-lang-container');
-            const langMenu = document.getElementById('lang-menu');
-            if (langContainer && !langContainer.contains(event.target)) {
-                langMenu.classList.add('hidden');
-            }
-        });
-
-        // Trigger hidden GTranslate when our custom menu is clicked
-        function changeGTranslate(langCode, e) {
-            e.preventDefault();
-            
-            // The GTranslate script injects a native select into our hidden wrapper. 
-            // We change its value programmatically.
-            const gtSelect = document.querySelector('.gtranslate_wrapper select');
-            if (gtSelect) {
-                gtSelect.value = langCode;
-                gtSelect.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-            
-            document.getElementById('current-lang-display').innerText = langCode.toUpperCase();
-            document.getElementById('lang-menu').classList.add('hidden');
-        }
-
-        // Detect current language from cookie on load to update custom UI
-        document.addEventListener("DOMContentLoaded", () => {
-            const langCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-            if (langCookie) {
-                const langValue = langCookie.split('=')[1].split('/').pop();
-                if (langValue && langValue !== 'de') {
-                    document.getElementById('current-lang-display').innerText = langValue.toUpperCase();
-                }
-            }
-        });
-
-        // Mobile Nav Menu Logic
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => menu.classList.toggle('hidden'));
         menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => menu.classList.add('hidden')));
 
-        // Scroll Reveal
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -539,7 +463,6 @@
         window.addEventListener("scroll", reveal);
         reveal();
 
-        // Accessibility Tools
         let currentFontSize = 100; 
         function changeFontSize(step) {
             currentFontSize += (step * 10);
@@ -549,7 +472,19 @@
         }
         function toggleContrast() { document.documentElement.classList.toggle('high-contrast'); }
 
-        // Service Expand Logic
+        document.addEventListener("DOMContentLoaded", () => {
+            if (localStorage.getItem("cookieAccepted") === "true") {
+                document.getElementById("cookie-banner").style.display = "none";
+            }
+        });
+
+        function acceptCookies() { 
+            localStorage.setItem("cookieAccepted", "true");
+            const banner = document.getElementById('cookie-banner');
+            banner.style.transform = 'translateY(100%)'; 
+            setTimeout(() => { banner.style.display = 'none'; }, 500);
+        }
+
         function toggleService(card) {
             const content = card.querySelector('.hidden-content');
             const textSpan = card.querySelector('.btn-text');
@@ -577,20 +512,6 @@
                 menu.classList.add('w-0', 'opacity-0', 'p-0');
                 menu.classList.remove('w-14', 'opacity-100', 'p-1', 'flex'); 
             }
-        }
-
-        // DSGVO Banner
-        document.addEventListener("DOMContentLoaded", () => {
-            if (localStorage.getItem("cookieAccepted") === "true") {
-                document.getElementById("cookie-banner").style.display = "none";
-            }
-        });
-
-        function acceptCookies() { 
-            localStorage.setItem("cookieAccepted", "true");
-            const banner = document.getElementById('cookie-banner');
-            banner.style.transform = 'translateY(100%)'; 
-            setTimeout(() => { banner.style.display = 'none'; }, 500);
         }
     </script>
 </body>
