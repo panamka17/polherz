@@ -35,21 +35,42 @@
         </button>
     </div>
 
-    <!-- Sticky Navigation -->
+    <!-- Sticky Navigation (IDENTICAL ACROSS ALL FILES) -->
     <header class="sticky top-0 z-40 bg-primary text-white shadow-md">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2 shrink-0">
-                <i class="fas fa-heart-pulse text-secondary text-2xl md:text-3xl"></i>
-                <div>
-                    <h1 class="notranslate text-xl md:text-2xl font-bold tracking-wide">Pol<span class="text-secondary">Herz</span></h1>
-                    <p class="text-[10px] md:text-xs text-gray-300 hidden sm:block">AMBULANTER PFLEGEDIENST</p>
-                </div>
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center shrink-0 bg-white/95 px-3 py-1.5 rounded-xl shadow-sm hover:bg-white transition">
+                <img src="https://i.ibb.co/Fb2zRwHb/logo-full-Color-rgb.png" alt="PolHerz GmbH Logo" class="h-9 md:h-11 w-auto object-contain">
             </a>
             
+            <!-- Right-aligned Elements Container -->
             <div class="flex items-center space-x-4 md:space-x-6">
+                <!-- Desktop Nav Tabs -->
                 <nav class="hidden md:flex space-x-6 font-medium items-center">
                     <a href="index.html#ueber-uns" class="hover:text-secondary transition duration-300">Über uns</a>
-                    <a href="index.html#leistungen" class="hover:text-secondary transition duration-300">Leistungen</a>
+                    
+                    <!-- Dropdown for Leistungen -->
+                    <div class="relative group py-2">
+                        <a href="index.html#leistungen" class="hover:text-secondary transition duration-300 flex items-center gap-1.5">
+                            Leistungen <i class="fas fa-chevron-down text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                        </a>
+                        <!-- Dropdown Menu -->
+                        <div class="absolute left-0 top-full w-80 bg-white text-gray-800 rounded-xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 py-3 mt-1">
+                            <div class="px-4 py-1 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Pflege & Alltag</div>
+                            <a href="index.html#grundpflege" class="block px-4 py-2 text-sm hover:bg-pink-50 hover:text-primary transition">Grundpflege</a>
+                            <a href="index.html#behandlungspflege" class="block px-4 py-2 text-sm hover:bg-pink-50 hover:text-primary transition">Behandlungspflege</a>
+                            <a href="index.html#haushaltshilfe" class="block px-4 py-2 text-sm hover:bg-pink-50 hover:text-primary transition">Haushaltshilfe</a>
+                            <a href="index.html#zusatzservice" class="block px-4 py-2 text-sm hover:bg-pink-50 hover:text-primary transition">Zusatzservice für Senioren</a>
+                            
+                            <div class="border-t border-gray-100 my-2"></div>
+                            <div class="px-4 py-1 text-[11px] font-bold text-secondary uppercase tracking-wider">Beratung & Unterstützung</div>
+                            <a href="index.html#pflegeberatung" class="block px-4 py-2 text-sm hover:bg-pink-50 hover:text-primary transition">1. Pflegeberatung & Unterstützung</a>
+                            <a href="index.html#beratungsbesuch" class="block px-4 py-2 text-sm hover:bg-pink-50 hover:text-primary transition">2. Beratungsbesuch (§ 37.3 SGB XI)</a>
+                            <a href="index.html#begutachtung" class="block px-4 py-2 text-sm hover:bg-pink-50 hover:text-primary transition">3. Pflegegrad-Begutachtung</a>
+                            <a href="index.html#verhinderungspflege" class="block px-4 py-2 text-sm hover:bg-pink-50 hover:text-primary transition">4. Verhinderungspflege</a>
+                        </div>
+                    </div>
+
                     <a href="index.html#standorte" class="hover:text-secondary transition duration-300">Standorte</a>
                     <a href="index.html#faq" class="notranslate hover:text-secondary transition duration-300">FAQ</a>
                     <a href="index.html#karriere" class="hover:text-secondary transition duration-300">Karriere</a>
@@ -59,15 +80,33 @@
                 <!-- Modern GTranslate Widget (Popup version) -->
                 <div class="gtranslate_wrapper shrink-0 z-50 flex items-center"></div>
 
+                <!-- Mobile Menu Button -->
                 <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none shrink-0" aria-label="Menü öffnen">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-primary pb-4 px-4 space-y-3 shadow-inner">
+        <!-- Mobile Nav Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-primary pb-4 px-4 space-y-3 shadow-inner border-t border-gray-800 pt-3">
             <a href="index.html#ueber-uns" class="block text-white hover:text-secondary transition">Über uns</a>
-            <a href="index.html#leistungen" class="block text-white hover:text-secondary transition">Leistungen</a>
+            
+            <!-- Mobile Leistungen Submenu -->
+            <div class="space-y-2">
+                <a href="index.html#leistungen" class="block text-white font-semibold hover:text-secondary transition">Leistungen</a>
+                <div class="pl-4 border-l-2 border-secondary/50 space-y-2 text-sm text-gray-300">
+                    <a href="index.html#grundpflege" class="block hover:text-secondary transition">Grundpflege</a>
+                    <a href="index.html#behandlungspflege" class="block hover:text-secondary transition">Behandlungspflege</a>
+                    <a href="index.html#haushaltshilfe" class="block hover:text-secondary transition">Haushaltshilfe</a>
+                    <a href="index.html#zusatzservice" class="block hover:text-secondary transition">Zusatzservice für Senioren</a>
+                    <div class="pt-1 text-xs font-bold text-secondary uppercase tracking-wider">Beratung & Unterstützung</div>
+                    <a href="index.html#pflegeberatung" class="block hover:text-secondary transition">Pflegeberatung & Unterstützung</a>
+                    <a href="index.html#beratungsbesuch" class="block hover:text-secondary transition">Beratungsbesuch (§ 37.3 SGB XI)</a>
+                    <a href="index.html#begutachtung" class="block hover:text-secondary transition">Pflegegrad-Begutachtung</a>
+                    <a href="index.html#verhinderungspflege" class="block hover:text-secondary transition">Verhinderungspflege</a>
+                </div>
+            </div>
+
             <a href="index.html#standorte" class="block text-white hover:text-secondary transition">Standorte</a>
             <a href="index.html#faq" class="notranslate block text-white hover:text-secondary transition">FAQ</a>
             <a href="index.html#karriere" class="block text-white hover:text-secondary transition">Karriere</a>
@@ -151,8 +190,10 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-12 mt-auto">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-            <div>
-                <h4 class="notranslate text-white text-xl font-bold mb-4">Pol<span class="text-secondary">Herz</span> GmbH</h4>
+            <div class="flex flex-col items-center md:items-start">
+                <a href="index.html" class="inline-block bg-white/95 px-3 py-1.5 rounded-xl mb-4">
+                    <img src="https://i.ibb.co/Fb2zRwHb/logo-full-Color-rgb.png" alt="PolHerz GmbH Logo" class="h-9 w-auto object-contain">
+                </a>
                 <p class="text-sm">Ein polnisches Herz für alle.<br>Ihr ambulanter Pflegedienst in Nordrhein-Westfalen.</p>
             </div>
             <div>
